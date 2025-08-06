@@ -1,0 +1,46 @@
+/* src/components/CardComponent/CardComponent.css */
+.card-component {
+  width: 220px;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.card-component:hover {
+  transform: scale(1.05);
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.card-info h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-info p {
+  font-size: 1.2rem;
+}
+
+.card-component.green {
+  background-color: #28a745;
+}
+
+.card-component.blue {
+  background-color: #007bff;
+}
+
+.card-component.red {
+  background-color: #dc3545;
+}
+
+.card-component.yellow {
+  background-color: #ffc107;
+}
