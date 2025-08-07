@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import './GenerateLinkPage.css';
+import { useNavigate } from 'react-router-dom';
 import { TEST_LINK_GENERATION_SUCCESS, TEST_LINK_GENERATION_FAILURE, TEST_LINK_NETWORK_ERROR } from '../../constants/errorConstants.ts';
 const GenerateLinkPage = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,6 +21,7 @@ const GenerateLinkPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    navigate('/start-test'); // Navigate to StartTestPage after form submission
     try {
       const response = await fetch('/api/generate-link', {
         method: 'POST',
