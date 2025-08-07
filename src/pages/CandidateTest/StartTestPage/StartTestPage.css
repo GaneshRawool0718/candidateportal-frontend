@@ -1,0 +1,30 @@
+/* src/pages/StartTestPage/StartTestPage.css */
+
+.start-test-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.candidate-details {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.start-btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.start-btn:hover {
+  background-color: #1e40af;
+}
