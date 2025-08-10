@@ -1,0 +1,45 @@
+/* src/components/CandidateProfileCard/CandidateProfileCard.css */
+
+.candidate-profile-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin: 2rem auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.status-tag {
+  background-color: #007bff;
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.manual-badge {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: #ff9800;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+p {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+  color: #333;
+}
