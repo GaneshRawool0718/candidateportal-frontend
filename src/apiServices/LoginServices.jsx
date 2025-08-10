@@ -1,21 +1,23 @@
-// src/apiServices/loginServices.js
-import axios from 'axios';
-import { NETWORK_ERROR } from '../constants/errorConstants.ts';
-import { BASE_URL } from '../constants/apiConstants';
+// src/apiServices/LoginServices.jsx
 
-export const loginUser = async (credentials) => {
-    /*
-    Function to log in a user.
-    It sends a POST request to the login endpoint with the user's credentials.
-    */
+import { AUTH_BASE_URL } from '../constants/apiConstants';
+import { NETWORK_ERROR } from '../constants/errorConstants.ts';
+
+export const loginUser = async ({ email, password }) => {
   try {
-    const response = await axios.post(`${BASE_URL}/login`, credentials);
-    return response.data; // Return the response data containing token and user info
-  } catch (error) {
-  if (error.response && error.response.data) {
-    throw new Error(error.response.data.message);
-  } else {
+    const response = await fetch(`${AUTH_BASE_URL}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText);
+    }
+
+    return await response.json(); // should include token and id
+  } catch (err) {
     throw new Error(NETWORK_ERROR);
   }
-}
 };
