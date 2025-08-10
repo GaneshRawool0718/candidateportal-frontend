@@ -1,9 +1,9 @@
 import { SIGNUP_NETWORK_ERROR } from '../constants/errorConstants.ts';
-import { BASE_URL } from '../constants/apiConstants';
+import {AUTH_BASE_URL} from '../constants/apiConstants';
 
 export const signupService = async ({ name, email, password }) => {
   try {
-    const response = await fetch(`${BASE_URL}/signup`, {
+    const response = await fetch(`${AUTH_BASE_URL}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
