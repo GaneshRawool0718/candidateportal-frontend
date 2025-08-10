@@ -1,0 +1,83 @@
+.admin-profile-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-profile-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.admin-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  margin-right: 16px;
+}
+
+.admin-info {
+  flex-grow: 1;
+}
+
+.admin-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.admin-email {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.admin-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.admin-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.edit-btn,
+.logout-btn {
+  flex: 1;
+  padding: 10px 0;
+  margin: 0 6px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background-color: #1e40af;
+}
+
+.logout-btn {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.logout-btn:hover {
+  background-color: #b91c1c;
+}

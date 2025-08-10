@@ -6,6 +6,8 @@ import DashboardPage from './pages/Dashboard/DashboardPage';
 import CandidateListPage from './components/CandidateList/CandidateListPage';
 import CandidateProfilePage from './components/CandidateProfile/CandidateProfileCard';
 
+import GenerateLinkPage from './components/GenerateLink/GenerateLinkPage';
+
 function App() {
   return (
      <Router>
@@ -16,6 +18,7 @@ function App() {
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/candidates/:status" element={<CandidateListPage />} />
       <Route path="/candidate/:id" element={<CandidateProfilePage />} /> 
+      <Route path="/generate-link" element={<GenerateLinkPage />} />
     </Routes>
     </Router>
   );
