@@ -33,16 +33,16 @@ const LoginForm = () => {
       setIsLoading(false);
       return;
     }
+    // navigate('/dashboard', { replace: true }); 
 
     try {
-      const data = await loginUser(formData);
-      saveAuthData(data.token, { id: data.id, role: data.role }); // Save auth data to local storage
-        navigate('/dashboard', { replace: true }); // Redirect to dashboard on successful login
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
+  const data = await loginUser(formData);
+  saveAuthData(data.token, data.id); // Save only token and id
+  navigate('/dashboard', { replace: true });
+} catch (err) {
+  setError(err.message);
+}
+
   };
 
   return (
