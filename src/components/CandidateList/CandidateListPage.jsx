@@ -1,6 +1,6 @@
-// src/pages/CandidateListPage.jsx
-import React from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom'; // Added useNavigate import
+import React, { useState, useEffect } from 'react';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { getCandidatesByStatus } from '../../apiServices/StatsApiService';
 import './CandidateListPage.css';
 
 const CandidateListPage = () => {
@@ -10,39 +10,26 @@ const CandidateListPage = () => {
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get('search')?.toLowerCase() || '';
 
-  const candidateLists = {
-    pending: [
-      { id: 1, name: 'John Doe', email: 'john@example.com', status: 'PENDING' },
-      { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'PENDING' },
-    ],
-    rejected: [
-      { id: 3, name: 'Mark Lee', email: 'mark@example.com', status: 'REJECTED' },
-    ],
-    inProgress: [
-      { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'IN_PROGRESS' },
-      { id: 5, name: 'Bob White', email: 'bob@example.com', status: 'IN_PROGRESS' },
-    ],
-    total: [
-      { id: 1, name: 'John Doe', email: 'john@example.com', status: 'PENDING' },
-      { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'PENDING' },
-      { id: 3, name: 'Mark Lee', email: 'mark@example.com', status: 'REJECTED' },
-      { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'IN_PROGRESS' },
-      { id: 5, name: 'Bob White', email: 'bob@example.com', status: 'IN_PROGRESS' },
-    ],
-  };
+  const [candidates, setCandidates] = useState([]);
 
-  const normalizedStatus = status?.toLowerCase();
-  const keyMap = {
-    total: 'total',
-    pending: 'pending',
-    rejected: 'rejected',
-    inprogress: 'inProgress',
-  };
-  const listKey = keyMap[normalizedStatus];
-  const candidates =
-    candidateLists[listKey]?.filter((candidate) =>
-      candidate.name.toLowerCase().includes(searchQuery)
-    ) || [];
+  useEffect(() => {
+    const fetchCandidates = async () => {
+      try {
+        const data = await getCandidatesByStatus(status);
+        setCandidates(data);
+      } catch (error) {
+        console.error(`Error fetching ${status} candidates:`, error);
+      }
+    };
+
+    fetchCandidates();
+  }, [status]);
+
+  const filteredCandidates = candidates.filter(
+    (candidate) =>
+      candidate.name.toLowerCase().includes(searchQuery) ||
+      candidate.email.toLowerCase().includes(searchQuery)
+  );
 
   return (
     <div className="candidate-list-page">
@@ -56,8 +43,8 @@ const CandidateListPage = () => {
       </header>
 
       <div className="candidate-grid">
-        {candidates.length > 0 ? (
-          candidates.map((candidate) => (
+        {filteredCandidates.length > 0 ? (
+          filteredCandidates.map((candidate) => (
             <div className="candidate-card" key={candidate.id}>
               <div className="card-header">
                 <h3>{candidate.name}</h3>
