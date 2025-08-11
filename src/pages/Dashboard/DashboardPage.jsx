@@ -1,18 +1,48 @@
-// src/pages/Dashboard/DashboardPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getDashboardStats,getTotalCandidates } from '../../apiServices/StatsApiService';
 import './DashboardPage.css';
 import CardComponent from '../../components/CardComponent/CardComponent';
 import AdminProfile from '../../components/AdminProfile/AdminProfile';
 
 const DashboardPage = () => {
   const navigate = useNavigate();
+  const [dashboardData, setDashboardData] = useState(null);
+  const [totalCandidates, setTotalCandidates] = useState(null); // Define totalCandidates state
   const [searchQuery, setSearchQuery] = useState('');
   const [showProfile, setShowProfile] = useState(false);
 
+  useEffect(() => {
+    // Fetching dashboard data from backend
+    const fetchDashboardData = async () => {
+      try {
+        const data = await getDashboardStats();
+        setDashboardData(data);
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+      }
+    };
+
+     // Fetching total candidates count
+    // const fetchTotalCandidates = async () => {
+    //   try {
+    //     const data = await getTotalCandidates();
+    //     setTotalCandidates(data);
+    //   } catch (error) {
+    //     console.error('Error fetching total candidates:', error);
+    //   }
+    // };
+
+    fetchDashboardData();
+    // fetchTotalCandidates();
+  
+  }, []);
+
+  
   const toggleProfile = () => {
     setShowProfile((prev) => !prev);
   };
+
 
   const handleCardClick = (status) => {
     navigate(`/candidates/${status}?search=${encodeURIComponent(searchQuery)}`);
@@ -46,35 +76,38 @@ const DashboardPage = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button onClick={() => handleCardClick('total')}>Search</button>
+        <button onClick={() => handleCardClick()}>Search</button>
       </div>
-
       {/* Dashboard Cards */}
       <div className="dashboard-cards">
-        <CardComponent
-          title="Total Candidates"
-          value="200"
-          bgColor="green"
-          onClick={() => handleCardClick('total')}
-        />
-        <CardComponent
-          title="Pending Candidates"
-          value="50"
-          bgColor="blue"
-          onClick={() => handleCardClick('pending')}
-        />
-        <CardComponent
-          title="Rejected Candidates"
-          value="20"
-          bgColor="red"
-          onClick={() => handleCardClick('rejected')}
-        />
-        <CardComponent
-          title="In Progress"
-          value="130"
-          bgColor="orange"
-          onClick={() => handleCardClick('inProgress')}
-        />
+        {dashboardData && (
+          <>
+            <CardComponent
+              title="Total Candidates"
+             value={dashboardData.totalCandidates} 
+              bgColor="green"
+              onClick={() => handleCardClick('total')}
+            />
+            <CardComponent
+              title="Pending Candidates"
+              value={dashboardData.pendingCandidates}
+              bgColor="blue"
+              onClick={() => handleCardClick('pending')}
+            />
+            <CardComponent
+              title="Rejected Candidates"
+              value={dashboardData.rejectedCandidates}
+              bgColor="red"
+              onClick={() => handleCardClick('rejected')}
+            />
+            <CardComponent
+              title="In Progress"
+              value={dashboardData.inProgressCandidates}
+              bgColor="orange"
+              onClick={() => handleCardClick('in_Progress')}
+            />
+          </>
+        )}
       </div>
 
       {/* Centered Test Link Button */}
