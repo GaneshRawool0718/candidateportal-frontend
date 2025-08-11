@@ -9,3 +9,10 @@ export const PASSWORD_LENGTH_ERROR = 'Password must be at least 6 characters.';
 export const TEST_LINK_GENERATION_SUCCESS = "✅ Test link generated and sent to candidate.";
 export const TEST_LINK_GENERATION_FAILURE = "❌ Failed to generate test link.";
 export const TEST_LINK_NETWORK_ERROR = "❌ Network error. Please try again.";
+
+export const ERROR_MESSAGES = {
+  INVALID_TOKEN: 'Invalid or expired token.',
+  CANDIDATE_NOT_FOUND: 'Candidate not found.',
+  TOKEN_USED: 'This test link has already been used.',
+  TOKEN_EXPIRED: 'This test link has expired.',
+};
