@@ -1,18 +1,21 @@
-// src/utils/storage.js
 
-export const saveAuthData = (token, id) => {
-  localStorage.setItem('authToken', token);
-  localStorage.setItem('userId', id);
+// utils/storage.js
+
+export const saveAuthData = (token, user) => {
+  localStorage.setItem('token', token);
+  localStorage.setItem('user', JSON.stringify(user));
 };
 
-export const getAuthData = () => {
-  return {
-    token: localStorage.getItem('authToken'),
-    userId: localStorage.getItem('userId'),
-  };
+export const getToken = () => {
+  return localStorage.getItem('token');
+};
+
+export const getUser = () => {
+  const user = localStorage.getItem('user');
+  return user ? JSON.parse(user) : null;
 };
 
 export const clearAuthData = () => {
-  localStorage.removeItem('authToken');
-  localStorage.removeItem('userId');
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
 };
